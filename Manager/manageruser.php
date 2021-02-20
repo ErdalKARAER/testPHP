@@ -49,13 +49,13 @@ else {
   public function connexion($co)
   {
     $bddco = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8', 'root', '');
-    $reqco = $bddco->prepare("SELECT * FROM utilisateur WHERE email = :email");
-    $reqco->execute(array("email"=>$co->getEmail()));
+    $reqco = $bddco->prepare("SELECT * FROM utilisateur WHERE numero_mail = :numero_mail");
+    $reqco->execute(array("numero_mail"=>$co->getNumero_mail()));
     $resco = $reqco->fetch();
 
     if(password_verify($co->getPwd(), $resco['pwd'])) {
-        $_SESSION['email'] = $co->getEmail();
-        header('Location: ../index.php ');
+        $_SESSION['numero_mail'] = $co->getNumero_mail();
+        header('Location: ../Vue/espace_membre.php');
       }
       else {
         echo "erreur";

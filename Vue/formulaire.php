@@ -3,12 +3,12 @@
 
 <meta charset="utf-8">
 
+<form action="../Traitement/traitement_connexion.php" method="post">
 
-  <section class="page-section cta">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <div class="cta-inner text-center rounded">
+  <label>Adresse e-mail ou mobile :</label><input type="text" name="numero_mail" placeholder="Votre login"required/><br>
+  <label>Mot de passe :</label><input type="text" name="pwd" placeholder="Votre mot de passe" required/><br>
+    <input type="submit" value="Connexion"/><br>
+</form>
             <h2 class="section-heading mb-4">
               <span class="section-heading-upper">Inscription</span>
             </h2>
