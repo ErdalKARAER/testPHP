@@ -7,6 +7,8 @@ class utilisateur{
   private $numero_mail;
   private $confirmation_numero_mail;
   private $pwd;
+  private $date_naissance;
+  private $sexe;
 
 
   public function __construct($donnees){
@@ -35,15 +37,23 @@ class utilisateur{
   }
   public function getNumero_mail()
   {
-    return $this->$numero_mail;
+    return $this->numero_mail;
   }
   public function getConfirmation_numero_mail()
   {
-    return $this->$confirmation_numero_mail;
+    return $this->confirmation_numero_mail;
   }
   public function getPwd()
   {
     return $this->pwd;
+  }
+  public function getDate_naissance()
+  {
+    return $this->date_naissance;
+  }
+  public function getSexe()
+  {
+    return $this->sexe;
   }
 
 
@@ -77,6 +87,13 @@ class utilisateur{
         {
           $this->pwd = $pwd;
         }
+      }
+      public function setDate_naissance($date_naissance){
+          $this->date_naissance = $date_naissance;
+      }
+
+      public function setSexe($sexe){
+          $this->sexe = $sexe;
       }
 
 }

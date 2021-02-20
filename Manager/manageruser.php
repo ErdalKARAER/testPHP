@@ -6,8 +6,8 @@ class manager{
 public function inscription($co)
 {
 $bdd = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8','root','');
-$req = $bdd->prepare('SELECT email FROM utilisateur WHERE email = :email');
-$req->execute(array('email'=>$co->getEmail()));
+$req = $bdd->prepare('SELECT numero_mail FROM utilisateur WHERE numero_mail = :numero_mail');
+$req->execute(array('numero_mail'=>$co->getNumero_mail()));
 $res = $req->fetch();
 if($res)
 {
@@ -19,15 +19,15 @@ if($res)
 
 else {
   $bdd2 = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8','root','');
-  $req2 = $bdd2->prepare("INSERT INTO utilisateur (prenom, nom, email, tel, age, pwd, admin) VALUES (:prenom, :nom, :email, :tel, :age, :pwd, :admin)");
+  $req2 = $bdd2->prepare("INSERT INTO utilisateur (prenom, nom, numero_mail, confirmation_numero_mail, pwd, date_naissance, sexe) VALUES (:prenom, :nom, :numero_mail, :confirmation_numero_mail, :pwd, :date_naissance, :sexe)");
   $res2 = $req2->execute(array(
                       'prenom'=>$co->getPrenom(),
                       'nom'=>$co->getNom(),
-                      'email'=>$co->getEmail(),
-                      'tel'=>$co->getTel(),
-                      'age'=>$co->getAge(),
+                      'numero_mail'=>$co->getNumero_mail(),
+                      'confirmation_numero_mail'=>$co->getConfirmation_numero_mail(),
                       'pwd'=>$co->getPwd(),
-                      'admin'=>(int)0
+                      'date_naissance'=>$co->getDate_naissance(),
+                      'sexe'=>$co->getSexe()
                           ));
       if($res2){
       echo "Le compte a bien été créer.";
@@ -56,6 +56,7 @@ else {
     if(password_verify($co->getPwd(), $resco['pwd'])) {
         $_SESSION['email'] = $co->getEmail();
         header('Location: ../index.php ');
+      }
       else {
         echo "erreur";
         echo '<form action="../Vues/form_connexion.php">
@@ -63,3 +64,4 @@ else {
       </form>';
       }
     }
+  }
