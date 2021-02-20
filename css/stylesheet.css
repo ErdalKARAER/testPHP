@@ -1,0 +1,49 @@
+body{
+  margin: 50px auto;
+  text-align: center;
+}
+
+.header{
+  width: 100%;
+  height: 74px;
+  background-color: #3b5b93;
+}
+
+.form_group{
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 0.9% 0px;
+}
+
+.form_group .box-1{
+  margin-right: 15px;
+}
+
+.form_group .box-2{
+  margin-right: 15px;
+}
+
+.form_group label{
+  margin: 0.6px 0px;
+  float: left;
+}
+
+.form_group a{
+  margin: 18px 0px;
+}
+
+.form_group .btn{
+  background: #4267b2;
+  color: white;
+  height: 24px;
+  text-align: center;
+  width: 121px;
+  cursor: pointer;
+  border: none;
+}
+
+.body{
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(211,211,230,1) 0%, rgba(255,255,255,1) 100%, rgba(0,212,255,1) 100%);
+}
