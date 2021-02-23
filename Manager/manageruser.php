@@ -3,10 +3,30 @@ session_start();
 
 class manager{
 
+private $bdd;
+
+public function __construct()
+{
+  try {
+
+    $this->bdd = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8','root',''); //La variable bdd permet de se connecter à la base de données grâce à PDO;
+    }
+
+    catch (\Exception $e) {
+      die('Erreur');                                                                    // Si jamais ça plante;
+    }
+}
+
+public function Connexionbdd()
+{
+  return $this->bdd;                                                                   //Ensuite, on retourne la connexion a la bdd grace a la fonction Connexionbdd;
+}
+
+
 public function inscription($co)
 {
-$bdd = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8','root','');
-$req = $bdd->prepare('SELECT numero_mail FROM utilisateur WHERE numero_mail = :numero_mail');
+$man = new manager();                                                                 //On instancie la classe manager qui va activer le construct
+$req = $man->Connexionbdd()->prepare('SELECT numero_mail FROM utilisateur WHERE numero_mail = :numero_mail');// On appelle la méthode Connexionbdd;
 $req->execute(array('numero_mail'=>$co->getNumero_mail()));
 $res = $req->fetch();
 if($res)
@@ -18,8 +38,7 @@ if($res)
 }
 
 else {
-  $bdd2 = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8','root','');
-  $req2 = $bdd2->prepare("INSERT INTO utilisateur (prenom, nom, numero_mail, pwd, date_naissance, sexe) VALUES (:prenom, :nom, :numero_mail, :pwd, :date_naissance, :sexe)");
+  $req2 = $man->prepare("INSERT INTO utilisateur (prenom, nom, numero_mail, pwd, date_naissance, sexe) VALUES (:prenom, :nom, :numero_mail, :pwd, :date_naissance, :sexe)");
   $res2 = $req2->execute(array(
                       'prenom'=>$co->getPrenom(),
                       'nom'=>$co->getNom(),
@@ -36,7 +55,7 @@ else {
     </form>';
       }
       else {
-          echo 'ERREUR';
+          echo 'Probleme lors de l\'inscription';
           echo '<form action="../Vue/formulaire.php">
           <input type="submit"  value="Retour"/><br>
 
@@ -48,8 +67,7 @@ else {
 
   public function connexion($co)
   {
-    $bddco = new PDO('mysql:host=localhost;dbname=testphp;charset=utf8', 'root', '');
-    $reqco = $bddco->prepare("SELECT * FROM utilisateur WHERE numero_mail = :numero_mail");
+    $reqco = $man->Connexionbdd()->$bdd->prepare("SELECT * FROM utilisateur WHERE numero_mail = :numero_mail");
     $reqco->execute(array("numero_mail"=>$co->getNumero_mail()));
     $resco = $reqco->fetch();
 
@@ -65,3 +83,4 @@ else {
       }
     }
   }
+?>

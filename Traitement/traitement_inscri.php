@@ -18,7 +18,7 @@ $co = new utilisateur(array(
 
 }
 else {
-    header('Location: ../Vue/formulaire.php');
+    header('Location: ../index.php');
 }
 }
 
