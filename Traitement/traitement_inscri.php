@@ -21,6 +21,9 @@ else {
     header('Location: ../index.php');
 }
 }
+else {
+    header('Location: ../index.php');
+}
 
 $man = new manager();
 $man->inscription($co);
